@@ -49,10 +49,44 @@ exports.CreationSauce =  (req, res, next) => {
 
 
 exports.likes_Dislike = (req , res , next) => {
- let like = req.body.like
- let userId = req.body.userID
- let sauceId = req.params.id
+  let like = req.body.like
+  let userId = req.body.userId
+  let sauceId = req.params.id
 
 
+  Sauce.findOne({_id: sauceId}) .then ((sauce) => {
+    
+    if (like ===1) {
+      Sauce.updateOne({_id: sauceId},  { $pull : {usersLiked : userId}, $inc: {likes: +1}})
+      .then(() => res.status(200).json({ message: 'A like'}))
+      .catch(error =>res.status(400).json({ error }));
+  } 
+  
 
+  if (like ===-1) {
+    Sauce.updateOne({_id: sauceId},  { $pull : {usersDisliked : userId}, $inc: {dislikes: +1}})
+    .then(() => res.status(200).json({ message: 'A like'}))
+    .catch(error =>res.status(400).json({ error }));
+} 
+
+if (like ===0) {
+  Sauce.updateOne({_id: sauceId},  { $pull : {usersLiked : userId}, $inc: {dislikes: +1}})
+  .then(() => res.status(200).json({ message: 'A like'}))
+  .catch(error =>res.status(400).json({ error }));
+
+} else 
+Sauce.updateOne({_id: sauceId},  { $pull : {usersDisliked : userId}, $inc: {likes: -1}})
+  .then(() => res.status(200).json({ message: 'A like'}))
+  .catch(error =>res.status(400).json({ error }));
+  
+
+
+  
+
+    
+
+});
+
+
+ 
 }

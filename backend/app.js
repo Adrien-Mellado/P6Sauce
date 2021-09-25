@@ -2,13 +2,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-
 /* importez mongoose */
 const mongoose = require('mongoose');
 
 /*importer dotenv*/
 const dotenv = require("dotenv");
 dotenv.config();
+
 
 const app = express();
 const path = require ('path');
@@ -37,6 +37,11 @@ app.use ((req,res )=>{
     res.json ({ message: 'votre requete a bien ete recue'});
     
 })*/
+
+
+
+
+
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
