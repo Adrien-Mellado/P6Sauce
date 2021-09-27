@@ -10,7 +10,7 @@ const multer = require ('../middleware/multer-config');
 
 router.get('/' ,auth, Saucectrl.Recuperation_Toutes_Sauce );
 
-router.post('/' ,auth, multer, Saucectrl.CreationSauce , Saucectrl.likes_Dislike); 
+router.post('/' ,auth, multer, Saucectrl.CreationSauce ); 
 
 router.get('/:id' ,auth, multer,Saucectrl.Recuperation_une_Sauce  );
  
@@ -18,7 +18,7 @@ router.put('/:id',auth, multer,Saucectrl.ModificationSauce );
     
 router.delete('/:id',auth, Saucectrl.SupressionSauce );
     
-router.post('/:id/like', auth, Saucectrl.likes_Dislike);
+router.post('/:id/like', auth, Saucectrl.likes_Dislike );
 
 
 
